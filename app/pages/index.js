@@ -6,10 +6,14 @@ import yogini from '../public/yogini.json'
 
 export default function Home() {
   return (
+
     <div className={styles.container}>
       <Head>
         <title>yogini</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta charset="utf-8"/>
+	      <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
       </Head>
 
       <main className={styles.main}>

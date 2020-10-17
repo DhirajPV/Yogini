@@ -9,15 +9,9 @@ export default function Exercise() {
                 <p> Get all the excercises avaiable and show em all </p>
                 <br />
 
-<<<<<<< HEAD
-                <ul>
-                    <li>Sth sth</li>
-                    <li>Sth sth</li>
-                    <li>Sth sth</li>
-                </ul>
-=======
+
                 <Webcam mirrored='true' style={{height: 'auto', width:'auto'}} />
->>>>>>> 6ef5a14dccd4fd65fc008563f3bbc3009ae3c864
+
 
                 <h2>
                     <Link href="/">

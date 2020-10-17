@@ -1,2 +1,11 @@
-# Yogini
-Yoga App using Tensorflow and Next.js
+# yogini
+yoga web app using posenet!
+
+
+## Developer instructions
+Once you clone the repository, make sure you run the following statements
+ in this order.
+ ```
+ cd app
+ yarn dev
+ ```

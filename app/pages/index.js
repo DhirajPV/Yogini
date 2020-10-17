@@ -3,7 +3,6 @@ import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import LocalLottie from '../components/LocalLottie'
 import yogini from '../public/yogini.json'
-import Webcam from 'react-webcam'
 
 export default function Home() {
   return (
@@ -45,8 +44,6 @@ export default function Home() {
           </Link>
         </div>
       </main>
-
-      <Webcam style={{height: 'auto', width:'auto'}} />
 
       <footer className={styles.footer}>
           <Link href="/about" >

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Webcam from 'react-webcam'
 
 
 export default function Exercise() {
@@ -7,6 +8,9 @@ export default function Exercise() {
                 <br></br>
                 <p> Get all the excercises avaiable and show em all </p>
                 <br />
+
+                <Webcam mirrored='true' style={{height: 'auto', width:'auto'}} />
+
                 <h2>
                     <Link href="/">
                         <a>Back to home</a>

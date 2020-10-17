@@ -4,6 +4,7 @@ import Link from 'next/link'
 import LocalLottie from '../components/LocalLottie'
 import yogini from '../public/yogini.json'
 
+
 export default function Home() {
   return (
 

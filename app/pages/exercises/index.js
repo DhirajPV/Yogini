@@ -9,7 +9,6 @@ export default function Exercise() {
                 <p> Get all the excercises avaiable and show em all </p>
                 <br />
 
-                <Webcam mirrored='true' style={{height: 'auto', width:'auto'}} />
 
                 <h2>
                     <Link href="/">

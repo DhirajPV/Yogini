@@ -167,7 +167,7 @@ export class Processor extends Component {
       <div>
         <Webcam
           mirrored="false"
-          style={{ height: "0", width: "0" }}
+          style={{ height: "auto", width: "auto" }}
           ref={this.WebcamRef}
         />
         <canvas id="canvas" width="650" height="480">

@@ -5,8 +5,8 @@ export default function Poses() {
   return (
     <div>
       <h1>Poses</h1>
-      <br></br>
-      <p> Individual popses</p>
+      <br/>
+      <p> Individual poses</p>
       <br />
       <h2>
         <Link href="/">
@@ -15,4 +15,4 @@ export default function Poses() {
       </h2>
     </div>
   );
-}
+};

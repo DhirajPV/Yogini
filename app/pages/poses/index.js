@@ -7,7 +7,8 @@ import * as posenet from '@tensorflow-models/posenet'
 
 
 export default function Poses() {
-    const WebcamRef = React.createRef();
+   
+ const WebcamRef = React.createRef();
 
     const runNet = async () => {
         const net = await posenet.load({
@@ -19,7 +20,7 @@ export default function Poses() {
     
         setInterval(() => {
             runPose(net);
-        }, 50);
+        }, 150);
     };
     
     
@@ -35,6 +36,7 @@ export default function Poses() {
 
 
     runNet();
+
 
     return  <div>
                 <h1>Poses</h1>

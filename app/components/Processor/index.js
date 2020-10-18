@@ -15,6 +15,9 @@ export class Processor extends Component {
     const ct = canvas.getContext("2d");
 
     ct.clearRect(0, 0, canvas.width, canvas.height);
+  
+      console.log(this.WebcamRef.current);
+    
     ct.drawImage(this.WebcamRef.current.video, 0, 0, 640, 480, 0, 0, 640, 480);
 
     const points = pose.keypoints;
@@ -57,7 +60,8 @@ export class Processor extends Component {
     const ct = canvas.getContext("2d");
 
     ct.clearRect(0, 0, canvas.width, canvas.height);
-    ct.drawImage(this.WebcamRef.current.video, 0, 0, 640, 480, 0, 0, 640, 480);
+    const video = this.WebcamRef.current.video; 
+    ct.drawImage(video, 0, 0, 640, 480, 0, 0, 640, 480);
 
     this.drawPoints(pose, colour);
     this.drawLines(pose, colour);
@@ -73,7 +77,7 @@ export class Processor extends Component {
       curFrame.width = this.WebcamRef.current.video.videoWidth;
       curFrame.height = this.WebcamRef.current.video.videoHeight;
       const pose = await net.estimateSinglePose(curFrame, {
-        flipHorizontal: false,
+        flipHorizontal: true,
       });
       this.drawPoints(pose, '#00FF00');
     }
@@ -100,7 +104,7 @@ export class Processor extends Component {
     return (
       <div>
         <Webcam
-          mirrored="true"
+          mirrored='true'
           style={{ height: "0", width: "0" }}
           ref={this.WebcamRef}
         />

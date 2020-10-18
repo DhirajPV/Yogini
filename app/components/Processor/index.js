@@ -26,6 +26,8 @@ export class Processor extends Component {
     const canvas = document.getElementById("canvas");
     const ct = canvas.getContext("2d");
 
+    let jointAngles = {}
+
     ct.clearRect(0, 0, canvas.width, canvas.height);
     ct.drawImage(this.WebcamRef.current.video, 0, 0, 650, 480, 0, 0, 650, 480);
 
@@ -37,6 +39,9 @@ export class Processor extends Component {
         ct.arc(key.position.x, key.position.y, 2, 0, 2 * Math.PI);
         ct.fillStyle = colour;
         ct.stroke();
+
+        //Store the angle
+        jointAngles[key.part] = key.position
       }
     }
 
@@ -46,11 +51,55 @@ export class Processor extends Component {
       ct.moveTo(points[link[0]].position.x, points[link[0]].position.y)
       ct.lineTo(points[link[1]].position.x, points[link[1]].position.y)
       ct.lineWidth = 3
-      ct.strokeStyle = colour
+      ct.strokeStyle = "green"
       ct.stroke()
       }
     }
+
+
+    
+     let yogaPoses = {
+       //pos1 is basically just a quick check of the three joints below, with ELBOW as the pivot
+      'pos1' : (360 - this.arcTanFunction(jointAngles.leftShoulder, jointAngles.leftElbow, jointAngles.leftWrist)),
+      'pos2' : this.arcTanFunction(jointAngles.rightShoulder, jointAngles.rightElbow, jointAngles.rightWrist), //same, for RIGHT
+
+      //Basically 0 when you stand STRAIGHT UP; try squatting... your back should be at 45 degrees, as given by THETA
+      'pos3' : (180 + this.arcTanFunction(jointAngles.rightEye, jointAngles.rightHip, jointAngles.rightKnee))
+     }
+
+
+      let theta = yogaPoses['pos3']
+      console.log(`Theta: ${theta}`)
+      const THRESHOLD = 45;
+      //If you're standing straight, it's no good; just start squatting...
+      if (theta < THRESHOLD && theta != null){console.log("Not good enough")}
   };
+
+
+  // Three joints: b is PIVOT
+  arcTanFunction(a,b,c){
+
+    if(a==null || b==null || c==null){
+      console.log("Out of Frame.")
+      return null
+    }
+    else{
+    let theta = (
+      Math.atan2(
+        a.y - b.y,
+        a.x - b.x
+      )
+      - Math.atan2(
+        c.y - b.y,
+        c.x - b.x
+      )
+    ) * (180 / Math.PI); 
+
+    // console.log(`Theta: ${theta}`)
+    return theta
+  }
+}
+
 
 
   runPose = async (net) => {

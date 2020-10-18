@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import Processor from '../../components/processor'
+import Webcam from 'react-webcam'
+import Processor from '../../components/Processor'
 import styles from "../../styles/Home.module.css";
 
 

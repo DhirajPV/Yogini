@@ -38,9 +38,8 @@ export class Exercises extends Component {
         const imageElement = document.getElementById('pose');
         const pose = await estimatePoseOnImage(imageElement);
         this.plotPoints(pose);
+        this.drawJoint(pose);
                 
-
-
     }
 
 
@@ -53,8 +52,8 @@ export class Exercises extends Component {
         // loop through the keypoints (check posenet for numbering -> location)
         for (let i = 0; i < points.length; i++) {
         const key = points[i];
-        if (key.score > 0.0) {
-            console.log(key.position);
+        if (key.score > 0) {
+            // console.log(key.position);
             ct.beginPath();
             ct.arc(key.position.x, key.position.y, 10, 0, 2 * Math.PI);
             ct.stroke();
@@ -62,6 +61,25 @@ export class Exercises extends Component {
       }
     }
 
+
+
+    drawJoint(pose){
+
+        const points = pose.keypoints;
+
+        for(let i=0; i < points.length ; i++){
+
+            let {part, score, pos} = points[i]
+
+            if (score > 0){
+                console.log("Joint ", points[i]);
+            }
+            
+        }
+
+
+
+    }
 
 
 

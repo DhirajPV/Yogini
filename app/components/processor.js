@@ -1,6 +1,7 @@
 import React, { Component, useEffect } from 'react'
 import Webcam from 'react-webcam'
 import PropTypes from 'prop-types'
+import styles from "../styles/Home.module.css";
 
 export class Processor extends Component {
     constructor(props) {
@@ -47,7 +48,7 @@ export class Processor extends Component {
 
     render() {
         return (
-            <div>
+            <div className={styles.container}>
             <Webcam 
                 mirrored = 'true' 
                 style = {{height: 'auto', width:'auto'}} 

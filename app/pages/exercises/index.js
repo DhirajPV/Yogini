@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import React, { Component } from 'react'
 import Webcam from 'react-webcam'
-import Processor from '../../components/processor'
+import Processor from '../../components/Processor'
+import styles from "../../styles/Home.module.css";
+
 
 //Backend
 import * as tfjs from "@tensorflow/tfjs";

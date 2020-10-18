@@ -8,12 +8,7 @@ export default function Poses() {
       <h1>Poses</h1>
       <br></br>
       <p> Individual popses</p>
-      <br />
-      <Webcam
-        ref={WebcamRef}
-        mirrored="false"
-        style={{ height: "auto", width: "auto" }}
-      />
+      <br/>
       <canvas id="canvas" width="640" height="480">
         {" "}
       </canvas>

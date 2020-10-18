@@ -18,10 +18,10 @@ export class Exercises extends Component {
     }
 
     componentDidMount() {
-        this.getPoseDetails()
+        // this.getPoseDetails()
     }
 
-
+/* 
     async getPoseDetails(){
 
         // const posenet = require('@tensorflow-models/posenet');
@@ -177,7 +177,7 @@ export class Exercises extends Component {
 
 
 
-
+*/
 
     render() {
         return  <div>
@@ -185,13 +185,15 @@ export class Exercises extends Component {
                     <br></br>
                     <p> Get all the excercises avaiable and show em all </p>
                     <br />
-
+                    <h3>Exercise Set 1</h3>
+                    <p>It contains the following poses</p>
                     <div id="container">
-                        <img src={'/pose3.png'} id="pose" width="300" height="300" />
-                        <canvas id="canvas" width="300" height="300"></canvas>
+                        <img src={'/pose1.png'} id="pose" width="35%" height="35%" />
+                        <img src={'/pose2.png'} id="pose" width="35%" height="35%" />
                     </div>
-                    
-
+                    <Link href="/exercises/ex1">
+                        <button>Go to Exercise 1</button>
+                    </Link>
                     <h2>
                         <Link href="/">
                             <a>Back to home</a>

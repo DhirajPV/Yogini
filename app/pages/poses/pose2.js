@@ -15,18 +15,18 @@ export class Pose1 extends Component {
     render() {
         return (
             <div className={styles.container}>
-                <h1>Pose 1</h1>
+                <h1>Pose 2</h1>
                 <br></br>
-                <p> Try out Pose 1 </p>
+                <p> Try out Pose 2 </p>
                 <br/>
                 <div className="container">
-                    <Processor poseNo="pose1" />
-                    <img src={'/pose1.png'} id="pose1" width="300" height="300" />
+                    <Processor poseNo="pose2" />
+                    <img src={'/pose4.png'} id="pose1" width="300" height="300" />
                 </div>
                 <h2>
                     <Link href="/poses">
                         <a className={styles.card}>
-                            Go to Poses
+                            Back to poses
                         </a>
                     </Link>
                 </h2>

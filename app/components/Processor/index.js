@@ -51,27 +51,36 @@ export class Processor extends Component {
       ct.moveTo(points[link[0]].position.x, points[link[0]].position.y)
       ct.lineTo(points[link[1]].position.x, points[link[1]].position.y)
       ct.lineWidth = 3
-      ct.strokeStyle = colour
+      ct.strokeStyle = "green"
       ct.stroke()
       }
     }
 
 
+    
+     let yogaPoses = {
+      'pos1' : [jointAngles.rightShoulder, jointAngles.rightHip, jointAngles.rightKnee],
+      'pos2' : [jointAngles.rightShoulder, jointAngles.rightElbow, jointAngles.rightWrist]
+     }
+      // JOINT 1----------------- PIVOT-------------------------JOINT 2
+      let threeJoints = yogaPoses['pos2']
+      let theta = this.arcTanFunction(threeJoints[0], threeJoints[1], threeJoints[2]);
 
-    //Get test coords
-    // console.log(jointAngles)
+      if (theta < 30 && theta != null){console.log("CROSSING THRESHOLD!")}
 
-    //3 joints
-    let pivot = jointAngles.leftElbow;
-    let jointA = jointAngles.leftShoulder;
-    let jointB = jointAngles.leftWrist;
+      
 
-    // this.triAngleFunc(jointA, pivot, jointB);
-    this.arcTanFunction(jointA, pivot, jointB);
   };
 
 
+  // Three joints: b is PIVOT
   arcTanFunction(a,b,c){
+
+    if(a==null || b==null || c==null){
+      console.log("Out of Frame.")
+      return null
+    }
+    else{
     let theta = (
       Math.atan2(
         a.y - b.y,
@@ -81,10 +90,12 @@ export class Processor extends Component {
         c.y - b.y,
         c.x - b.x
       )
-    ) * (180 / Math.PI);
+    ) * (180 / Math.PI);  //+180?
 
-    console.log("THETA, ", theta)
+    console.log(`Theta: ${theta}`)
+    return theta
   }
+}
 
 
   //WANT angle between AB and BC (so B is hinge)

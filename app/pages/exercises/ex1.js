@@ -11,7 +11,7 @@ export class ex1 extends Component {
         return (
             <div>
                 <h2>Welcome to exercise 1. Press the button once you are done with the pose</h2>
-                <Link href="/exercises/ex1-2"><button>Go to next pose</button></Link>
+                <Link href="/exercises/ex1-2"><a className={styles.card}>Go to next pose</a></Link>
                 <div>
                     <Pose1 />
                 </div>

@@ -62,8 +62,8 @@ export class Processor extends Component {
 
         const maxAng1 = 200;
         const maxAng2 = 200;
-        const minAng1 = 170;
-        const minAng2 = 170;
+        const minAng1 = 165;
+        const minAng2 = 165;
         if (minAng1 > ang1 || maxAng1 < ang1 || minAng2 > ang2 || maxAng2 < ang2) {
           console.log(ang1)
           changeColour=1;

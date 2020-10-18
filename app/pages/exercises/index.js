@@ -91,8 +91,12 @@ export class Exercises extends Component {
     // this.angleFunc(ankle,hip,knee)
 
     
-    this.angleFunc(jointAngles.leftWrist,
-                   jointAngles.leftHip);
+    // this.angleFunc(jointAngles.leftShoulder,
+    //                jointAngles.leftHip);
+
+    this.triAngleFunc(jointAngles.leftEye, 
+                    jointAngles.leftWrist,  //Hinge
+                     jointAngles.leftAnkle);
 
 
 
@@ -127,7 +131,46 @@ export class Exercises extends Component {
             ct.fillStyle = "red" 
         })
 
-        
+    }
+
+
+    //WANT angle between AB and BC (so B is hinge)
+    triAngleFunc(a, b ,c){
+
+        // Angle_B=Math.acos
+        //     ((Math.pow (len (b, c), 2) +
+        //     Math.pow (len (a, b),2) -
+        //     Math.pow (len (a, c),2))/ (2*len
+        //     (b, c) *len (a, b)))*180/Math.PI
+
+        //Get vectors
+        let xs = (a.x - b.x);
+        let ys = (a.y - b.y);
+        let AB = xs*xs + ys*ys;
+
+        xs = (b.x - c.x);
+        ys = (b.y - c.y);
+        let BC = xs*xs + ys*ys;
+
+        xs = (a.x - c.x);
+        ys = (a.y - c.y);
+        let AC = xs*xs + ys*ys;
+
+
+        let theta = Math.acos((BC + AB -AC)/(2*BC*AB))*180/Math.PI
+        console.log("THETA, ", theta)
+
+
+        const canvas = document.getElementById("canvas");
+        const ct = canvas.getContext("2d");
+
+        let joints = [a, b, c]
+
+        joints.forEach((ele, i)=>{
+            ct.beginPath();
+            ct.arc(ele.x, ele.y, 10, 0, 2 * Math.PI);
+            ct.stroke();
+        })
 
     }
 

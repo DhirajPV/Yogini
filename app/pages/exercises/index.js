@@ -180,7 +180,7 @@ export class Exercises extends Component {
 */
 
     render() {
-        return  <div>
+        return  <div className={styles.container}>
                     <h1>Exercises</h1>
                     <br></br>
                     <p> Get all the excercises avaiable and show em all </p>
@@ -192,7 +192,7 @@ export class Exercises extends Component {
                         <img src={'/pose2.png'} id="pose" width="35%" height="35%" />
                     </div>
                     <Link href="/exercises/ex1">
-                        <button>Go to Exercise 1</button>
+                        <button className={styles.card} >Go to Exercise 1</button>
                     </Link>
                     <h2>
                         <Link href="/">

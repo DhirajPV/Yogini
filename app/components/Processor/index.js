@@ -26,6 +26,8 @@ export class Processor extends Component {
     const canvas = document.getElementById("canvas");
     const ct = canvas.getContext("2d");
 
+    let jointAngles = {}
+
     ct.clearRect(0, 0, canvas.width, canvas.height);
     ct.drawImage(this.WebcamRef.current.video, 0, 0, 650, 480, 0, 0, 650, 480);
 
@@ -37,6 +39,9 @@ export class Processor extends Component {
         ct.arc(key.position.x, key.position.y, 2, 0, 2 * Math.PI);
         ct.fillStyle = colour;
         ct.stroke();
+
+        //Store the angle
+        jointAngles[key.part] = key.position
       }
     }
 
@@ -50,7 +55,59 @@ export class Processor extends Component {
       ct.stroke()
       }
     }
+
+
+
+    //Get test coords
+    // console.log(jointAngles)
+
+    //3 joints
+    let pivot = jointAngles.leftElbow;
+    let jointA = jointAngles.leftShoulder;
+    let jointB = jointAngles.leftWrist;
+
+    this.triAngleFunc(jointA, pivot, jointB);
   };
+
+
+  //WANT angle between AB and BC (so B is hinge)
+  triAngleFunc(a, b ,c){
+    //Get vectors
+    let xs = (a.x - b.x);
+    let ys = (a.y - b.y);
+    let AB = xs*xs + ys*ys;
+
+    xs = (b.x - c.x);
+    ys = (b.y - c.y);
+    let BC = xs*xs + ys*ys;
+
+    xs = (a.x - c.x);
+    ys = (a.y - c.y);
+    let AC = xs*xs + ys*ys;
+
+
+    let theta = Math.acos((BC + AB -AC)/(2*BC*AB))*180/Math.PI
+    console.log("THETA, ", theta)
+
+
+    const canvas = document.getElementById("canvas");
+    const ct = canvas.getContext("2d");
+
+    let joints = [a, b, c]
+
+    joints.forEach((ele, i)=>{
+        ct.beginPath();
+        ct.arc(ele.x, ele.y, 10, 0, 2 * Math.PI);
+        ct.stroke();
+    })
+
+}
+
+
+
+
+
+
 
 
   runPose = async (net) => {

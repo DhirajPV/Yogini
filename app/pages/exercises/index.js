@@ -1,16 +1,20 @@
 import Link from 'next/link'
 import Webcam from 'react-webcam'
 import Processor from '../../components/processor'
+import styles from "../../styles/Home.module.css";
+
 
 export default function Exercise() {
-    return  <div>
+    return  <div className={styles.container}>
                 <h1>Exercises</h1>
                 <br></br>
                 <p> Get all the excercises avaiable and show em all </p>
                 <br/>
                 <h2>
                     <Link href="/">
-                        <a>Back to home</a>
+                        <a className={styles.card}>
+                            Back to home
+                        </a>
                     </Link>
                 </h2>
                 <Processor/>

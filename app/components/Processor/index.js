@@ -166,7 +166,7 @@ export class Processor extends Component {
     return (
       <div>
         <Webcam
-          mirrored="false"
+          mirrored="true"
           style={{ height: "auto", width: "auto" }}
           ref={this.WebcamRef}
         />

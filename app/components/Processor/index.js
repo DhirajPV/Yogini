@@ -59,17 +59,20 @@ export class Processor extends Component {
 
     
      let yogaPoses = {
-      'pos1' : [jointAngles.rightShoulder, jointAngles.rightHip, jointAngles.rightKnee],
-      'pos2' : [jointAngles.rightShoulder, jointAngles.rightElbow, jointAngles.rightWrist]
+       //pos1 is basically just a quick check of the three joints below, with ELBOW as the pivot
+      'pos1' : (360 - this.arcTanFunction(jointAngles.leftShoulder, jointAngles.leftElbow, jointAngles.leftWrist)),
+      'pos2' : this.arcTanFunction(jointAngles.rightShoulder, jointAngles.rightElbow, jointAngles.rightWrist), //same, for RIGHT
+
+      //Basically 0 when you stand STRAIGHT UP; try squatting... your back should be at 45 degrees, as given by THETA
+      'pos3' : (180 + this.arcTanFunction(jointAngles.rightEye, jointAngles.rightHip, jointAngles.rightKnee))
      }
-      // JOINT 1----------------- PIVOT-------------------------JOINT 2
-      let threeJoints = yogaPoses['pos2']
-      let theta = this.arcTanFunction(threeJoints[0], threeJoints[1], threeJoints[2]);
 
-      if (theta < 30 && theta != null){console.log("CROSSING THRESHOLD!")}
 
-      
-
+      let theta = yogaPoses['pos3']
+      console.log(`Theta: ${theta}`)
+      const THRESHOLD = 45;
+      //If you're standing straight, it's no good; just start squatting...
+      if (theta < THRESHOLD && theta != null){console.log("Not good enough")}
   };
 
 
@@ -90,37 +93,12 @@ export class Processor extends Component {
         c.y - b.y,
         c.x - b.x
       )
-    ) * (180 / Math.PI);  //+180?
+    ) * (180 / Math.PI); 
 
-    console.log(`Theta: ${theta}`)
+    // console.log(`Theta: ${theta}`)
     return theta
   }
 }
-
-
-  //WANT angle between AB and BC (so B is hinge)
-  triAngleFunc(a, b ,c){
-
-    var AB = this.euclideanDist(a.x, b.x, a.y, b.y)
-    var BC = this.euclideanDist(b.x, c.x, b.y, c.y)
-    var AC = this.euclideanDist(a.x, c.x, a.y, c.y)
-
-    let theta = Math.acos((BC + AB -AC)/(2*BC*AB)) * 180/Math.PI
-    console.log("THETA, ", theta)
-}
-
-//Returns squared Euclidean distance
- euclideanDist(x1,x2,y1,y2){
-  let a = x1-x2
-  let b = y1-y2
-
-  return Math.pow(a,2)+Math.pow(b,2)
-}
-
-
-
-
-
 
 
 

@@ -38,7 +38,7 @@ export class Exercises extends Component {
     
         const imageElement = document.getElementById('pose');
         const pose = await estimatePoseOnImage(imageElement);
-        this.plotPoints(pose);
+        // this.plotPoints(pose);
         this.drawJoint(pose);
                 
     }
@@ -68,30 +68,73 @@ export class Exercises extends Component {
 
         const points = pose.keypoints;
 
+        let jointAngles = {}
+
         for(let i=0; i < points.length ; i++){
 
-            let {part, score, pos} = points[i]
+            let {part, score} = points[i]
 
             if (score > 0){
-                console.log("Joint ", points[i]);
-            }
-            
+                // console.log("Part ", part);
+                // console.log("Coords ", points[i].position);
+                // jointAngles[points[i].part] = 0
+                jointAngles[part] = points[i].position
         }
+    }
+
+    console.log(jointAngles)
+
+    // let knee = jointAngles.leftKnee;
+    // let hip = jointAngles.leftHip;
+    // let ankle = jointAngles.leftAnkle;
+
+    // this.angleFunc(ankle,hip,knee)
+
+    
+    this.angleFunc(jointAngles.leftShoulder, jointAngles.leftAnkle);
 
 
+
+
+}
+
+    angleFunc(joint1, joint2){
+
+        let imaginaryPoint = {x: joint1.x,  y: joint2.y};
+
+        let trunkLean = 360 - (
+            Math.atan2(
+              imaginaryPoint.y - joint2.y,
+              imaginaryPoint.x - joint2.x
+            ) - Math.atan2(
+                joint1.y - joint2.y,
+                joint1.x - joint2.x)
+          ) * (180 / Math.PI);
+        
+        console.log('Trunk Lean: ', trunkLean)
+
+
+        const canvas = document.getElementById("canvas");
+        const ct = canvas.getContext("2d");
+
+        let joints = [joint1, joint2 , imaginaryPoint]
+
+        joints.forEach((ele, i)=>{
+            ct.beginPath();
+            ct.arc(ele.x, ele.y, 10, 0, 2 * Math.PI);
+            ct.stroke();
+        })
+
+        
 
     }
 
 
 
+
+
+
     render() {
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> e7a014c6373ab6393e1333f5ffedbeb43ea8a561
         return  <div>
                     <h1>Exercises</h1>
                     <br></br>
@@ -99,11 +142,7 @@ export class Exercises extends Component {
                     <br />
 
                     <div id="container">
-<<<<<<< HEAD
-                        <img src={'/pose3.png'} id="pose" width="300" height="300" />
-=======
                         <img src={'/pose4.png'} id="pose" width="300" height="300" />
->>>>>>> e7a014c6373ab6393e1333f5ffedbeb43ea8a561
                         <canvas id="canvas" width="300" height="300"></canvas>
                     </div>
                     
@@ -118,8 +157,4 @@ export class Exercises extends Component {
     }
 }
 
-<<<<<<< HEAD
 export default Exercises;
-=======
-export default Exercises;
->>>>>>> e7a014c6373ab6393e1333f5ffedbeb43ea8a561

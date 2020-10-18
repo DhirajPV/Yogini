@@ -75,7 +75,7 @@ export class Processor extends Component {
       const pose = await net.estimateSinglePose(curFrame, {
         flipHorizontal: false,
       });
-      this.drawPoints(pose, '#00FF00');
+      this.draw(pose, '#00FF00');
     }
   };
 

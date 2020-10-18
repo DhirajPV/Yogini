@@ -10,10 +10,8 @@ export class Exercises extends Component {
     }
 
     componentDidMount() {
-        this.getPoseDetails()
+        // this.getPoseDetails()
     }
-
-
 
     async getPoseDetails(){
 
@@ -30,7 +28,6 @@ export class Exercises extends Component {
         }
     
         const imageElement = document.getElementById('pose');
-        console.log(imageElement)
         const pose = await estimatePoseOnImage(imageElement);
         
     
@@ -50,7 +47,7 @@ export class Exercises extends Component {
                     <img src={'/pose4.png'} id="pose" />
 
 
-                    <Webcam mirrored='true' style={{height: 'auto', width:'auto'}} />
+                    {/* <Webcam mirrored='true' style={{height: 'auto', width:'auto'}} /> */}
 
 
                     <h2>
@@ -58,7 +55,9 @@ export class Exercises extends Component {
                             <a>Back to home</a>
                         </Link>
                     </h2>
+
                     <Processor/>
+
                 </div>         
     }
 }

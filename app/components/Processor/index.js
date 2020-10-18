@@ -66,41 +66,44 @@ export class Processor extends Component {
     let jointA = jointAngles.leftShoulder;
     let jointB = jointAngles.leftWrist;
 
-    this.triAngleFunc(jointA, pivot, jointB);
+    // this.triAngleFunc(jointA, pivot, jointB);
+    this.arcTanFunction(jointA, pivot, jointB);
   };
+
+
+  arcTanFunction(a,b,c){
+    let theta = (
+      Math.atan2(
+        a.y - b.y,
+        a.x - b.x
+      )
+      - Math.atan2(
+        c.y - b.y,
+        c.x - b.x
+      )
+    ) * (180 / Math.PI);
+
+    console.log("THETA, ", theta)
+  }
 
 
   //WANT angle between AB and BC (so B is hinge)
   triAngleFunc(a, b ,c){
-    //Get vectors
-    let xs = (a.x - b.x);
-    let ys = (a.y - b.y);
-    let AB = xs*xs + ys*ys;
 
-    xs = (b.x - c.x);
-    ys = (b.y - c.y);
-    let BC = xs*xs + ys*ys;
+    var AB = this.euclideanDist(a.x, b.x, a.y, b.y)
+    var BC = this.euclideanDist(b.x, c.x, b.y, c.y)
+    var AC = this.euclideanDist(a.x, c.x, a.y, c.y)
 
-    xs = (a.x - c.x);
-    ys = (a.y - c.y);
-    let AC = xs*xs + ys*ys;
-
-
-    let theta = Math.acos((BC + AB -AC)/(2*BC*AB))*180/Math.PI
+    let theta = Math.acos((BC + AB -AC)/(2*BC*AB)) * 180/Math.PI
     console.log("THETA, ", theta)
+}
 
+//Returns squared Euclidean distance
+ euclideanDist(x1,x2,y1,y2){
+  let a = x1-x2
+  let b = y1-y2
 
-    const canvas = document.getElementById("canvas");
-    const ct = canvas.getContext("2d");
-
-    let joints = [a, b, c]
-
-    joints.forEach((ele, i)=>{
-        ct.beginPath();
-        ct.arc(ele.x, ele.y, 10, 0, 2 * Math.PI);
-        ct.stroke();
-    })
-
+  return Math.pow(a,2)+Math.pow(b,2)
 }
 
 

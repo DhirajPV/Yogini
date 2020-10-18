@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 
 export default function Poses() {
+
   return (
     <div>
       <h1>Poses</h1>

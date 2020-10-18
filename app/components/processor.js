@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import Webcam from 'react-webcam'
+
+import PropTypes from 'prop-types'
+import styles from "../styles/Home.module.css";
+
 import * as tfjs from "@tensorflow/tfjs"
 import * as tf from "@tensorflow/tfjs-core"
 import * as posenet from "@tensorflow-models/posenet"
@@ -72,7 +76,7 @@ export class Processor extends Component {
 
     render() {
         return (
-            <div>
+            <div className={styles.container}>
             <Webcam 
                 mirrored = 'true' 
                 style = {{height: 'auto', width:'auto'}} 

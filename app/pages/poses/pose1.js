@@ -26,7 +26,7 @@ export class Pose1 extends Component {
                 <h2>
                     <Link href="/poses">
                         <a className={styles.card}>
-                            Back to poses
+                            Go to Poses
                         </a>
                     </Link>
                 </h2>

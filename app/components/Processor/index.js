@@ -86,7 +86,7 @@ export class Processor extends Component {
     }
     
     
-    for (let i = 0; i < connections.length; i++) {
+     for (let i = 0; i < connections.length; i++) {
       let link = connections[i]
       if (points[link[0]].score > 0.2 || points[link[1]].score > 0.2) {
       ct.moveTo(points[link[0]].position.x, points[link[0]].position.y)

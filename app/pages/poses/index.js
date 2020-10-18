@@ -20,7 +20,7 @@ export default function Poses() {
               <p>View and try out Pose 1</p>
             </a>
           </Link>
-          <Link href="/poses/pose1" >
+          <Link href="/poses/pose2" >
             <a className={styles.card}>
               <h3>Pose 2 &rarr;</h3>
               <p>View and try out Pose 2</p>

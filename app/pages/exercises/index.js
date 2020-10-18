@@ -91,7 +91,8 @@ export class Exercises extends Component {
     // this.angleFunc(ankle,hip,knee)
 
     
-    this.angleFunc(jointAngles.leftShoulder, jointAngles.leftAnkle);
+    this.angleFunc(jointAngles.leftWrist,
+                   jointAngles.leftHip);
 
 
 
@@ -123,6 +124,7 @@ export class Exercises extends Component {
             ct.beginPath();
             ct.arc(ele.x, ele.y, 10, 0, 2 * Math.PI);
             ct.stroke();
+            ct.fillStyle = "red" 
         })
 
         
@@ -142,7 +144,7 @@ export class Exercises extends Component {
                     <br />
 
                     <div id="container">
-                        <img src={'/pose4.png'} id="pose" width="300" height="300" />
+                        <img src={'/pose3.png'} id="pose" width="300" height="300" />
                         <canvas id="canvas" width="300" height="300"></canvas>
                     </div>
                     

@@ -85,6 +85,13 @@ export class Exercises extends Component {
 
 
     render() {
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> e7a014c6373ab6393e1333f5ffedbeb43ea8a561
         return  <div>
                     <h1>Exercises</h1>
                     <br></br>
@@ -92,7 +99,11 @@ export class Exercises extends Component {
                     <br />
 
                     <div id="container">
+<<<<<<< HEAD
                         <img src={'/pose3.png'} id="pose" width="300" height="300" />
+=======
+                        <img src={'/pose4.png'} id="pose" width="300" height="300" />
+>>>>>>> e7a014c6373ab6393e1333f5ffedbeb43ea8a561
                         <canvas id="canvas" width="300" height="300"></canvas>
                     </div>
                     
@@ -107,4 +118,8 @@ export class Exercises extends Component {
     }
 }
 
+<<<<<<< HEAD
 export default Exercises;
+=======
+export default Exercises;
+>>>>>>> e7a014c6373ab6393e1333f5ffedbeb43ea8a561

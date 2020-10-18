@@ -26,6 +26,7 @@ export class Processor extends Component {
 
     let jointAngles = {}
 
+    if (this.WebcamRef.current !== null || canvas !== null) {
     ct.clearRect(0, 0, canvas.width, canvas.height);
     ct.drawImage(this.WebcamRef.current.video, 0, 0, 650, 480, 0, 0, 650, 480);
 
@@ -43,34 +44,55 @@ export class Processor extends Component {
       }
     }
 
-    for (let i = 0; i < connections.length; i++) {
+    let changeColour = 0;
+
+    let yogaPoses = {
+      //pos1 is basically just a quick check of the three joints below, with ELBOW as the pivot
+     'pos1' : (360 - this.arcTanFunction(jointAngles.leftShoulder, jointAngles.leftElbow, jointAngles.leftWrist)),
+     'pos2' : this.arcTanFunction(jointAngles.rightShoulder, jointAngles.rightElbow, jointAngles.rightWrist), //same, for RIGHT
+
+      //Basically 0 when you stand STRAIGHT UP; try squatting... your back should be at 45 degrees, as given by THETA
+      'pos3' : (180 + this.arcTanFunction(jointAngles.rightEye, jointAngles.rightHip, jointAngles.rightKnee))
+    }
+
+      if (this.props.poseNo == "pose1") {
+        let ang1 = yogaPoses['pos1'];
+        let ang2 = yogaPoses['pos2'];
+
+        const maxAng1 = 200;
+        const maxAng2 = 200;
+        const minAng1 = 170;
+        const minAng2 = 170;
+        if (minAng1 > ang1 || maxAng1 < ang1 || minAng2 > ang2 || maxAng2 < ang2) {
+          console.log(ang1)
+          changeColour=1;
+        }
+      } else {
+        let theta = yogaPoses['pos3']
+        console.log(`Theta: ${theta}`)
+        const THRESHOLD = 45;
+        //If you're standing straight, it's no good; just start squatting...
+        if (theta < THRESHOLD && theta != null){changeColour=1};
+      }
+     
+    
+    
+    
+    
+     for (let i = 0; i < connections.length; i++) {
       let link = connections[i]
       if (points[link[0]].score > 0.2 || points[link[1]].score > 0.2) {
       ct.moveTo(points[link[0]].position.x, points[link[0]].position.y)
       ct.lineTo(points[link[1]].position.x, points[link[1]].position.y)
       ct.lineWidth = 3
-      ct.strokeStyle = "green"
+      ct.strokeStyle = changeColour===0 ? "green" : "red"
       ct.stroke()
       }
     }
 
 
-    
-     let yogaPoses = {
-       //pos1 is basically just a quick check of the three joints below, with ELBOW as the pivot
-      'pos1' : (360 - this.arcTanFunction(jointAngles.leftShoulder, jointAngles.leftElbow, jointAngles.leftWrist)),
-      'pos2' : this.arcTanFunction(jointAngles.rightShoulder, jointAngles.rightElbow, jointAngles.rightWrist), //same, for RIGHT
+  }
 
-      //Basically 0 when you stand STRAIGHT UP; try squatting... your back should be at 45 degrees, as given by THETA
-      'pos3' : (180 + this.arcTanFunction(jointAngles.rightEye, jointAngles.rightHip, jointAngles.rightKnee))
-     }
-
-
-      let theta = yogaPoses['pos3']
-      console.log(`Theta: ${theta}`)
-      const THRESHOLD = 45;
-      //If you're standing straight, it's no good; just start squatting...
-      if (theta < THRESHOLD && theta != null){console.log("Not good enough")}
   };
 
 

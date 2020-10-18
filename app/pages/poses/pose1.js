@@ -9,6 +9,7 @@ export class Pose1 extends Component {
     }
 
     componentDidMount() {
+
     }
 
     render() {
@@ -19,7 +20,7 @@ export class Pose1 extends Component {
                 <p> Try out Pose 1 </p>
                 <br/>
                 <div className="container">
-                    <Processor/>
+                    <Processor poseNo="pose1" />
                     <img src={'/pose1.png'} id="pose1" width="300" height="300" />
                 </div>
                 <h2>

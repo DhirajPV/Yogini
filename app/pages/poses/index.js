@@ -8,10 +8,10 @@ import * as posenet from "@tensorflow-models/posenet";
 export default function Poses() {
   const WebcamRef = React.createRef();
 
-  function drawPoints(pose) {
+  function drawPoints(pose, colour) {
     const canvas = document.getElementById("canvas");
     const ct = canvas.getContext("2d");
-
+    ct.clearRect(0, 0, canvas.width, canvas.height);
     const points = pose.keypoints;
     // loop through the keypoints (check posenet for numbering -> location)
     for (let i = 0; i < points.length; i++) {
@@ -19,10 +19,16 @@ export default function Poses() {
       if (key.score > 0.1) {
         console.log(key.position);
         ct.beginPath();
-        ct.arc(key.position.x, key.position.y, 10, 0, 2 * Math.PI);
+        ct.arc(key.position.x, key.position.y, 2, 0, 2 * Math.PI);
+        ctx.fillStyle = color;
         ct.stroke();
+        ct.fill();
       }
     }
+  }
+
+  function drawLines(pose, colour){
+
   }
 
   function drawCameraIntoCanvas() {
@@ -43,7 +49,9 @@ export default function Poses() {
       const curFrame = WebcamRef.current.video;
       curFrame.width = WebcamRef.current.video.videoWidth;
       curFrame.height = WebcamRef.current.video.videoHeight;
-      const pose = await net.estimateSinglePose(curFrame);
+      const pose = await net.estimateSinglePose(curFrame, {
+        flipHorizontal: true
+      });
       drawPoints(pose);
     }
   };
@@ -70,7 +78,7 @@ export default function Poses() {
       <br />
       <Webcam
         ref={WebcamRef}
-        mirrored="true"
+        mirrored="false"
         style={{ height: "auto", width: "auto" }}
       />
       <canvas id="canvas" width="640" height="480">

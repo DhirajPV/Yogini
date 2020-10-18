@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Webcam from 'react-webcam'
 import Processor from '../../components/processor'
 import styles from "../../styles/Home.module.css";
 
@@ -10,6 +9,7 @@ export default function Exercise() {
                 <br></br>
                 <p> Get all the excercises avaiable and show em all </p>
                 <br/>
+                <Processor/>
                 <h2>
                     <Link href="/">
                         <a className={styles.card}>
@@ -17,6 +17,5 @@ export default function Exercise() {
                         </a>
                     </Link>
                 </h2>
-                <Processor/>
             </div>
 }
